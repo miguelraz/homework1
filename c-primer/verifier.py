@@ -9,7 +9,7 @@ def runAndReadOutput(args):
     if args is str:
         args = [args]
     try:
-        return subprocess.check_output(args)
+        return subprocess.check_output(args).decode()
     except subprocess.CalledProcessError as e:
         exitWithError("ERROR: runtime error with %s" % str(args))
 
