@@ -1,0 +1,6 @@
+/.buildmode
+*.gcda
+*.gcno
+*.gcov
+/is_power_of_two
+*.o
