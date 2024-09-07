@@ -24,24 +24,24 @@ int main(int argc, char * argv[]) {  // What is the type of argv?
   pcp = argv;  // Why is this assignment valid?
 
   const char * pcc = c;  // pcc is a pointer to char constant
-  char const * pcc2 = c;  // What is the type of pcc2?
+  char const * pcc2 = c;  // What is the type of pcc2? #mraz: pointer to a const char aka the char's not allowed to change, the pointer is!
 
   // For each of the following, why is the assignment:
-  *pcc = '7';  // invalid?
+  //*pcc = '7';  // invalid? //#mraz: not allowed to change the char!
   pcc = *pcp;  // valid?
   pcc = argv[0];  // valid?
 
   char * const cp = c;  // cp is a const pointer to char
   // For each of the following, why is the assignment:
-  cp = *pcp;  // invalid?
-  cp = *argv;  // invalid?
-  *cp = '!';  // valid?
+  //cp = *pcp;  // invalid?  //#mraz: nope, changing the pointer!
+  //cp = *argv;  // invalid? //#mraz: nope, you're changing the pointer. Bzzzt!
+  *cp = '!';  // valid? // #mraz: yes, the pointer remained constant, but the pointee is allowed to mutate
 
   const char * const cpc = c;  // cpc is a const pointer to char const
   // For each of the following, why is the assignment:
-  cpc = *pcp;  // invalid?
-  cpc = argv[0];  // invalid?
-  *cpc = '@';  // invalid?
+  //cpc = *pcp;  // invalid? //#mraz: not allowed to mutate the pointer!
+  //cpc = argv[0];  // invalid? //#mraz:: no allowed to mutate the pointer!
+  //*cpc = '@';  // invalid? //#mraz: not allowed to mutate the pointee!
 
   return 0;
 }
