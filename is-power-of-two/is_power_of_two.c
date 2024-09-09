@@ -35,7 +35,7 @@
 
 bool is_power_of_two(int x) {
   int i = 1;
-  while (i < x) {
+  while (i < x && i != 1073741824) {
     i <<= 1;
   }
   return (x == i);

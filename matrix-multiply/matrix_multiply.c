@@ -32,7 +32,7 @@
 #include <math.h>
 #include <string.h>
 
- #include "./tbassert.h"
+#include "./tbassert.h"
 
 // Allocates a row-by-cols matrix and returns it
 matrix* make_matrix(int rows, int cols) {
@@ -74,7 +74,7 @@ void print_matrix(const matrix* m) {
 
 
 // Multiply matrix A*B, store result in C.
-int matrix_multiply_run(const matrix* A, const matrix* B, matrix* C) {
+int matrix_multiply_run(const matrix* A, const matrix* B, matrix* const C) {
   tbassert(A->cols == B->rows,
            "A->cols = %d, B->rows = %d\n", A->cols, B->rows);
   tbassert(A->rows == C->rows,
@@ -84,7 +84,11 @@ int matrix_multiply_run(const matrix* A, const matrix* B, matrix* C) {
 
   for (int i = 0; i < A->rows; i++) {
     for (int j = 0; j < B->cols; j++) {
-      for (int k = 0; k < A->cols; k++) {
+      C->values[i][j] = 0;
+    }
+    for (int k = 0; k < A->cols; k++) {
+      // FIX! Initialize to 0, then update it!
+      for (int j = 0; j < B->cols; j++) {
         C->values[i][j] += A->values[i][k] * B->values[k][j];
       }
     }

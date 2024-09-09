@@ -45,7 +45,7 @@ typedef struct {
 } matrix;
 
 // Multiply matrix A*B, store result in C.
-int matrix_multiply_run(const matrix* A, const matrix* B, matrix* C);
+int matrix_multiply_run(const matrix* A, const matrix* B, matrix* const C);
 
 // Allocates a row-by-cols matrix and returns it
 matrix* make_matrix(int rows, int cols);

@@ -51,14 +51,14 @@ int main(int argc, char** argv) {
       number_to_test, expected_is_power_of_2 ? "" : " not");
   }
 
-  int multiplication_of_powers_of_2 = 1;
+  unsigned long long multiplication_of_powers_of_2 = 1;
   for (int i = 0; i < num_of_tests; ++i) {
     if (is_power_of_two(tests[i])) {
-      multiplication_of_powers_of_2 *= tests[i];
+      multiplication_of_powers_of_2 *= (unsigned long long) tests[i];
     }
   }
 
-  printf("Multiplication of all powers of 2 is: %d, make sure it is equal to 36028797018963968\n",
+  printf("Multiplication of all powers of 2 is: %llu, make sure it is equal to 36028797018963968\n",
     multiplication_of_powers_of_2);
 
   return 0;

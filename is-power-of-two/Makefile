@@ -41,7 +41,8 @@ CFLAGS_RELEASE := -O1 -DNDEBUG
 CFLAGS_ASAN := -O1 -gdwarf-2 -fsanitize=address
 
 # These flags are used to invoke Clang's UndefinedBehaviorSanitizer
-CFLAGS_UBSAN := -O1 -gdwarf-2
+# FIX! add -fsanitize=undefined
+CFLAGS_UBSAN := -O1 -gdwarf-2 -fsanitize=undefined
 
 # TELERUN flags needed to optimize for the remote machine
 CFLAGS_TELERUN := -march=haswell
@@ -60,6 +61,14 @@ endif
 # default, your code is linked against the "rt" library with the flag -lrt;
 # this library is used by the timing code in the testbed.
 LDFLAGS := -lrt -flto -fuse-ld=lld
+
+# FIX: add coniditional linking flags
+ifneq ($(ASAN), 1)
+  LDFLAGS := $(LDFLAGS) -fsanitize=address
+endif
+ifneq ($(UBSAN), 1)
+  LDFLAGS := $(LDFLAGS) -fsanitize=undefined
+endif
 
 # If not using ASAN or UBSAN, uses static linking for telerun compatibility.
 ifneq ($(ASAN), 1)
